@@ -1,0 +1,15 @@
+﻿<Settings>
+  <Sitecore>
+    <Processing>
+      <Services>
+        <TaskServicesFactory>
+          <Options>
+            <ForecastTrainingWorker>
+              <Type>Demo.Foundation.ProcessingEngine.Train.Workers.ForecastTrainingWorker, Demo.Foundation.ProcessingEngine</Type>
+            </ForecastTrainingWorker>
+          </Options>
+        </TaskServicesFactory>
+      </Services>
+    </Processing>
+  </Sitecore>
+</Settings>

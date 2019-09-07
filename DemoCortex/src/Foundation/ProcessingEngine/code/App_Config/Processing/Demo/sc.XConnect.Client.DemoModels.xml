@@ -1,0 +1,18 @@
+﻿<Settings>
+  <Sitecore>
+    <XConnect.Client>
+      <Services>
+        <Client.Configuration>
+          <Options>
+            <Models>
+              <CustomModel>
+                <TypeName>Demo.Foundation.ProcessingEngine.Models.XConnect.XdbPurchaseModel, Demo.Foundation.ProcessingEngine</TypeName>
+                <PropertyName>Model</PropertyName>
+              </CustomModel>
+            </Models>
+          </Options>
+        </Client.Configuration>
+      </Services>
+    </XConnect.Client>
+  </Sitecore>
+</Settings>

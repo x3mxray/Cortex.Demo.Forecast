@@ -1,0 +1,241 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0D1A5FF4-E76F-48D3-8211-92085D45E2CE}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Demo.Foundation.ProcessingEngine</RootNamespace>
+    <AssemblyName>Demo.Foundation.ProcessingEngine</AssemblyName>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <Choose>
+    <When Condition="'$(LocalReferences)' == 'true'">
+      <ItemGroup>
+        <Reference Include="Sitecore.Analytics">
+          <HintPath>$(SitecorePath)\bin\Sitecore.Analytics.dll</HintPath>
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Sitecore.Analytics.Core">
+          <HintPath>$(SitecorePath)\bin\Sitecore.Analytics.Core.dll</HintPath>
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Sitecore.Analytics.Model">
+          <HintPath>$(SitecorePath)\bin\Sitecore.Analytics.Model.dll</HintPath>
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Sitecore.Analytics.XConnect">
+          <HintPath>$(SitecorePath)\bin\Sitecore.Analytics.XConnect.dll</HintPath>
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Sitecore.ContentSearch">
+          <HintPath>$(SitecorePath)\bin\Sitecore.ContentSearch.dll</HintPath>
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Sitecore.ContentSearch.Linq">
+          <HintPath>$(SitecorePath)\bin\Sitecore.ContentSearch.Linq.dll</HintPath>
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Sitecore.ContentTesting.ML">
+          <HintPath>$(SitecorePath)\bin\Sitecore.ContentTesting.ML.dll</HintPath>
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Sitecore.ExperienceEditor">
+          <HintPath>$(SitecorePath)\bin\Sitecore.ExperienceEditor.dll</HintPath>
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Sitecore.Framework.Conditions">
+          <HintPath>$(SitecorePath)\bin\Sitecore.Framework.Conditions.dll</HintPath>
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Sitecore.Framework.Configuration.Extensions">
+          <HintPath>$(SitecorePath)\bin\Sitecore.Framework.Configuration.Extensions.dll</HintPath>
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Sitecore.Framework.Rules.Abstractions">
+          <HintPath>$(SitecorePath)\bin\Sitecore.Framework.Rules.Abstractions.dll</HintPath>
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Sitecore.Kernel">
+          <HintPath>$(SitecorePath)\bin\Sitecore.Kernel.dll</HintPath>
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Sitecore.Marketing">
+          <HintPath>$(SitecorePath)\bin\Sitecore.Marketing.dll</HintPath>
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Sitecore.Marketing.Core">
+          <HintPath>$(SitecorePath)\bin\Sitecore.Marketing.Core.dll</HintPath>
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Sitecore.Marketing.Search">
+          <HintPath>$(SitecorePath)\bin\Sitecore.Marketing.Search.dll</HintPath>
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Sitecore.Marketing.Taxonomy">
+          <HintPath>$(SitecorePath)\bin\Sitecore.Marketing.Taxonomy.dll</HintPath>
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Sitecore.Nexus.Licensing">
+          <HintPath>$(SitecorePath)\bin\Sitecore.Nexus.Licensing.dll</HintPath>
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Sitecore.Processing.Common">
+          <HintPath>$(SitecorePath)\bin\Sitecore.Processing.Common.dll</HintPath>
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Sitecore.Processing.Engine">
+          <HintPath>$(SitecorePath)\bin\Sitecore.Processing.Engine.dll</HintPath>
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Sitecore.Xdb.Configuration">
+          <HintPath>$(SitecorePath)\bin\Sitecore.Xdb.Configuration.dll</HintPath>
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Sitecore.XConnect">
+          <HintPath>$(SitecorePath)\bin\Sitecore.XConnect.dll</HintPath>
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Sitecore.XConnect.Client">
+          <HintPath>$(SitecorePath)\bin\Sitecore.XConnect.Client.dll</HintPath>
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Sitecore.XConnect.Client.Configuration">
+          <HintPath>$(SitecorePath)\bin\Sitecore.XConnect.Client.Configuration.dll</HintPath>
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Sitecore.XConnect.Collection.Model">
+          <HintPath>$(SitecorePath)\bin\Sitecore.XConnect.Collection.Model.dll</HintPath>
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Sitecore.XConnect.Segmentation.Predicates.Model">
+          <HintPath>$(SitecorePath)\bin\Sitecore.XConnect.Segmentation.Predicates.Model.dll</HintPath>
+          <Private>False</Private>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <Otherwise>
+      <ItemGroup>
+        <PackageReference Include="Sitecore.Analytics" Version="[9.1.0]" />
+        <PackageReference Include="Sitecore.Analytics.Core" Version="[9.1.0]" />
+        <PackageReference Include="Sitecore.Analytics.Model" Version="[9.1.0]" />
+        <PackageReference Include="Sitecore.Analytics.XConnect" Version="[9.1.0]" />
+        <PackageReference Include="Sitecore.ContentSearch" Version="[9.1.0]" />
+        <PackageReference Include="Sitecore.ContentSearch.Linq" Version="[9.1.0]" />
+        <PackageReference Include="Sitecore.ContentTesting.ML" Version="[9.1.0]" />
+        <PackageReference Include="Sitecore.ExperienceEditor" Version="[9.1.0]" />
+        <PackageReference Include="Sitecore.Framework.Conditions" Version="[3.1.0]" />
+        <PackageReference Include="Sitecore.Framework.Configuration.Extensions" Version="[5.2.0]" />
+        <PackageReference Include="Sitecore.Framework.Rules.Abstractions" Version="[3.2.0]" />
+        <PackageReference Include="Sitecore.Kernel" Version="[9.1.0]" />
+        <PackageReference Include="Sitecore.Marketing" Version="[9.1.0]" />
+        <PackageReference Include="Sitecore.Marketing.Core" Version="[9.1.0]" />
+        <PackageReference Include="Sitecore.Marketing.Search" Version="[9.1.0]" />
+        <PackageReference Include="Sitecore.Marketing.Taxonomy" Version="[9.1.0]" />
+        <PackageReference Include="Sitecore.Nexus.Licensing" Version="[9.0.171002]" />
+        <PackageReference Include="Sitecore.Processing.Common" Version="[9.1.0]" />
+        <PackageReference Include="Sitecore.Processing.Engine" Version="[9.1.0]" />
+        <PackageReference Include="Sitecore.Xdb.Configuration" Version="[9.1.0]" />
+        <PackageReference Include="Sitecore.XConnect" Version="[9.1.0]" />
+        <PackageReference Include="Sitecore.XConnect.Client" Version="[9.1.0]" />
+        <PackageReference Include="Sitecore.XConnect.Client.Configuration" Version="[9.1.0]" />
+        <PackageReference Include="Sitecore.XConnect.Collection.Model" Version="[9.1.0]" />
+        <PackageReference Include="Sitecore.XConnect.Segmentation.Predicates.Model" Version="[9.1.0]" />
+      </ItemGroup>
+    </Otherwise>
+  </Choose>
+  <ItemGroup>
+    <Content Include="App_Config\Include\Foundation\Foundation.Cortex.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_Config\Processing\Demo\sc.XConnect.Client.DemoModels.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_Config\Processing\Demo\sc.Processing.Engine.DemoAgents.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_Config\Processing\Demo\sc.Processing.Engine.MLNet.Workers.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_Config\Processing\Demo\sc.Processing.Services.MLNet.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_Config\Processing\Demo\sc.PurchaseInteractionModel.Models.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_Config\AutomationEngime\Demo\sc.PurchaseOutcome.Model.xml" />
+    <Content Include="App_Config\Processing\sc.XConnect.Client.xml">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Agents\DemoAgent.cs" />
+    <Compile Include="Extensions\TaskManagerExtensions.cs" />
+    <Compile Include="Import\ExcelImportProcessor.cs" />
+    <Compile Include="Mappers\ProductsMapper.cs" />
+    <Compile Include="Models\Customer.cs" />
+    <Compile Include="Agents\SitecoreTaskManager.cs" />
+    <Compile Include="Models\ML\CountryStats.cs" />
+    <Compile Include="Models\ML\ProductStats.cs" />
+    <Compile Include="Services\MLNetService.cs" />
+    <Compile Include="Train\Models\PurchaseInteractionModel.cs" />
+    <Compile Include="Models\PurchaseInvoice.cs" />
+    <Compile Include="Models\PurchaseOutcome.cs" />
+    <Compile Include="Models\XConnect\XdbPurchaseModel.cs" />
+    <Compile Include="Processors\ConvertPurchaseOutcome.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\XConnectService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="EPPlus">
+      <Version>4.5.3.2</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Configuration">
+      <Version>2.1.1</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions">
+      <Version>2.1.1</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder">
+      <Version>2.1.1</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection">
+      <Version>2.1.1</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions">
+      <Version>2.1.1</Version>
+    </PackageReference>
+    <PackageReference Include="RestSharp">
+      <Version>106.6.9</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup />
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+</Project>

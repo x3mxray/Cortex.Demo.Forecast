@@ -1,0 +1,11 @@
+<Settings>
+  <Sitecore>
+    <Processing>
+      <Services>
+        <PurchaseInteractionModel>
+          <Type>Demo.Foundation.ProcessingEngine.Train.Models.PurchaseInteractionModel, Demo.Foundation.ProcessingEngine</Type>
+        </PurchaseInteractionModel>
+      </Services>
+    </Processing>
+  </Sitecore>
+</Settings>
