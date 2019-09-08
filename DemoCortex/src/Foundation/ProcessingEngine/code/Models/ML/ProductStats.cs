@@ -11,7 +11,7 @@
         public int Count { get; set; }
 
         public int Units { get; set; }
-        public int? Prev { get; set; }
-        public int? Next { get; set; }
+        public int Prev { get; set; }
+        public int Next { get; set; }
     }
 }

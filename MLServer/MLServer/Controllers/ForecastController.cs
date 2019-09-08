@@ -55,9 +55,9 @@ namespace MLServer.Controllers
         }
 
         [HttpPost("countrystats")]
-        public List<CountryStats> CountryStats(string productId)
+        public List<CountryStats> CountryStats(string country)
         {
-            return ForecastEngine.CountryHistory(productId);
+            return ForecastEngine.CountryHistory(country);
         }
 
         [HttpPost("countryforecast")]

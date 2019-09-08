@@ -47,7 +47,6 @@ namespace Demo.Foundation.ProcessingEngine.Mappers
                     ProductId = x.Key.StockCode,
                     Year = x.Key.Year,
                     Month = x.Key.Month,
-
                     Count = x.Count(),
                     Units = x.Sum(y => y.Quantity),
                     Min = x.Min(y => y.Quantity),
@@ -56,7 +55,24 @@ namespace Demo.Foundation.ProcessingEngine.Mappers
                 })
                 .ToList();
 
-            foreach (var product in results)
+            // remove statistics of last month (it is not finished)
+            var products = results.GroupBy(x => x.ProductId);
+
+            var ret = new List<ProductStats>();
+            foreach (var product in products)
+            {
+                var maxYear = product.Max(y => y.Year);
+                var maxMonth = product.Where(x => x.Year==maxYear).Max(y => y.Month);
+            
+                foreach (var p in product)
+                {
+                    if(!(p.Year== maxYear && p.Month==maxMonth))
+                        ret.Add(p);
+                }
+            }
+
+            // assign Prev and Next months sold units fields 
+            foreach (var product in ret)
             {
                 var nextYear = product.Year;
                 var nextMonth = product.Month;
@@ -70,7 +86,7 @@ namespace Demo.Foundation.ProcessingEngine.Mappers
                     nextYear++;
                 }
 
-                product.Next = results.FirstOrDefault(x => (x.ProductId == product.ProductId) && (x.Year == nextYear) && (x.Month == nextMonth))?.Units;
+                product.Next = ret.FirstOrDefault(x => (x.ProductId == product.ProductId) && (x.Year == nextYear) && (x.Month == nextMonth))?.Units ?? -1 ;
 
                 var prevYear = product.Year;
                 var prevMonth = product.Month;
@@ -83,10 +99,10 @@ namespace Demo.Foundation.ProcessingEngine.Mappers
                     prevMonth = 12;
                     prevYear--;
                 }
-                product.Prev = results.FirstOrDefault(x => (x.ProductId == product.ProductId) && (x.Year == prevYear) && (x.Month == prevMonth))?.Units;
+                product.Prev = ret.FirstOrDefault(x => (x.ProductId == product.ProductId) && (x.Year == prevYear) && (x.Month == prevMonth))?.Units ?? -1;
             }
 
-            return results.Where(x => x.Prev.HasValue && x.Next.HasValue).ToList();
+            return ret; //.Where(x => x.Prev.HasValue && x.Next.HasValue).ToList();
         }
 
         public static List<CountryStats> CalculateCountryStats(List<PurchaseInvoice> list)
@@ -106,6 +122,16 @@ namespace Demo.Foundation.ProcessingEngine.Mappers
                 })
                 .ToList();
 
+            // remove statistics of last month (it is not finished)
+            var countries = results.GroupBy(x => x.Country);
+            foreach (var country in countries)
+            {
+                var maxYear = country.Max(y => y.Year);
+                var maxMonth = country.Where(x => x.Year == maxYear).Max(y => y.Month);
+                results.RemoveAll(x => x.Country == country.Key && x.Year == maxYear && x.Month == maxMonth);
+            }
+
+            // assign Prev and Next months sold units fields 
             foreach (var product in results)
             {
                 var nextYear = product.Year;
@@ -120,7 +146,7 @@ namespace Demo.Foundation.ProcessingEngine.Mappers
                     nextYear++;
                 }
 
-                product.Next = results.FirstOrDefault(x => (x.Country == product.Country) && (x.Year == nextYear) && (x.Month == nextMonth))?.Units;
+                product.Next = results.FirstOrDefault(x => (x.Country == product.Country) && (x.Year == nextYear) && (x.Month == nextMonth))?.Units ?? -1;
 
                 var prevYear = product.Year;
                 var prevMonth = product.Month;
@@ -133,10 +159,10 @@ namespace Demo.Foundation.ProcessingEngine.Mappers
                     prevMonth = 12;
                     prevYear--;
                 }
-                product.Prev = results.FirstOrDefault(x => (x.Country == product.Country) && (x.Year == prevYear) && (x.Month == prevMonth))?.Units;
+                product.Prev = results.FirstOrDefault(x => (x.Country == product.Country) && (x.Year == prevYear) && (x.Month == prevMonth))?.Units ?? -1;
             }
 
-            return results.Where(x => x.Prev.HasValue && x.Next.HasValue).ToList();
+            return results;//.Where(x => x.Prev.HasValue && x.Next.HasValue).ToList();
         }
     }
 }

@@ -71,7 +71,6 @@ namespace Demo.Project.Demo.Controllers
                 var products = new ExcelImportProcessor().GetImportProducts(stream);
 
                 var count = products.Count;
-                var index = 0;
 
                 var service = new ItemService();
                 service.CreateItems(products);

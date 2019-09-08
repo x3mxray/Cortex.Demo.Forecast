@@ -1,0 +1,79 @@
+﻿@using Sitecore.Mvc
+@using Sitecore.Web.UI.Controls.Common.UserControls
+@model Sitecore.Mvc.Presentation.RenderingModel
+@{
+    var rendering = Html.Sitecore().Controls().GetUserControl(Model.Rendering);
+	rendering.Requires.Script("client", "products.js");
+	var htmlAttr = rendering.HtmlAttributes;
+}
+ <link rel="stylesheet" href="~/sitecore/shell/client/Applications/ExperienceAnalytics/Dashboard/Forecasting/bootstrap.sitecore.analytics.css" />
+ <link rel="stylesheet" href="~/sitecore/shell/client/Applications/ExperienceAnalytics/Dashboard/Forecasting/forecast.css" />
+
+<div @htmlAttr class="sc-border sc_Border_200 data-sc-registered" style="padding: 15px;background-color: #ffffff;font-family: Montserrat, sans-serif;">
+
+
+        <div class="row my-4">
+            <div class="col" id="remote">
+                <input class="typeahead w-100" type="text" placeholder="Type a product">
+            </div>
+            <div class="w-100 mx-3 border-bottom-highlight"></div>
+        </div>
+        <div id="product" class="row my-3 align-items-center justify-content-center d-none">
+            <div class="col offset-4 col-sm-4">
+                <b id="productName" class="" style="font-size: 14pt;"></b><br />
+                <span id="productPrice" style="font-size: 18pt; color: #999999">1.76 $</span>
+            </div>
+            <div class="col offset-1 col-sm-2 offset-sm-0">
+                <img id="productImage" class="img-responsive" style="max-height: 150px" />
+            </div>
+        </div>
+        <div id="plot" class="row my-4 d-none">
+            <div class="col pl-md-4" style="font-size: 12pt">
+                <span id="labelItem" class="font-weight-bold"></span> - Sales Forecast Prediction (Next month)
+            </div>
+            <div class="w-100 mx-3 border-bottom-highlight"></div>
+            <div id="lineChart" class="col-12 col-sm-11 col-md-10 my-2 mx-auto responsive-plot" style="height: 355px;">
+            </div>
+        </div>
+        <div id="tableHeader" class="row mt-4 d-none">
+            <div class="col pl-md-4" style="font-size: 12pt">
+                <span class="font-weight-bold" id="tableHeaderCaption">Sales month / $</span>
+            </div>
+            <div class="w-100 mx-3 border-bottom-highlight"></div>
+        </div>
+        <div id="tableHistory" class="row mb-5 d-none">
+            <div class="offset-1 col-10 offset-md-2 col-md-4 mb-5 mb-md-0" style="">
+                <div id="historyTable" class="row" style="font-size: 8pt; margin-top: 12px;display: flex;-ms-flex-wrap: wrap;flex-wrap: wrap;">
+                </div>
+            </div>
+            <div class="offset-1 col-10 offset-md-2 col-md-3" style="font-size: 14pt; line-height: 1">
+                <div class="row h-100 align-items-center justify-content-center" style="margin-top: 100px;">
+                    <div class="col-5 col-md" style="line-height: 1.2">
+                        <div class="mt-0">
+                            <span class="text-nowrap">Total</span><br />
+                            <span id="labelTotal" class="text-nowrap" style="font-size: 13pt;"></span><br />
+                            <span id="valueTotal" class="font-weight-bold" style="font-size: 27pt;">0</span>
+                        </div>
+                        <div class="mt-5">
+                            <span class="font-weight-bold">Forecast</span><br />
+                            <span id="labelForecast" class="text-nowrap" style="font-size: 13pt;"></span><br />
+                            <span id="valueForecast" class="font-weight-bold es-color" style="font-size: 26pt;"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+ 
+
+<script type="text/javascript">
+    var apiUri = {
+        findproduct: '@Sitecore.Configuration.Settings.GetSetting("SitecoreApi_FindProduct")',
+		forecasting: '@Sitecore.Configuration.Settings.GetSetting("SitecoreApi_ProductForecast")',
+        history: '@Sitecore.Configuration.Settings.GetSetting("SitecoreApi_ProductHistory")'
+    };
+</script>
+
+</div>
+
+   
+  

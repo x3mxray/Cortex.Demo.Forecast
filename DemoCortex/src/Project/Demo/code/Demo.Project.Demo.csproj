@@ -112,6 +112,7 @@
         <PackageReference Include="Sitecore.Xdb.Configuration" Version="[9.1.0]" />
         <PackageReference Include="Sitecore.XConnect" Version="[9.1.0]" />
         <PackageReference Include="Sitecore.XConnect.Client" Version="[9.1.0]" />
+        <PackageReference Include="Sitecore.Speak.Client" Version="[9.1.0]" />
       </ItemGroup>
     </Otherwise>
   </Choose>
@@ -153,16 +154,17 @@
     <Reference Include="System.Configuration" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Demo\Layout.cshtml" />
     <Content Include="App_Config\Include\Project\Demo.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Views\Demo\Index.cshtml" />
-    <Content Include="Views\Demo\Demo.cshtml" />
-    <Content Include="Views\Demo\DemoVip.cshtml" />
-    <None Include="Web.config">
-      <SubType>Designer</SubType>
-    </None>
+    <Content Include="sitecore\shell\client\Applications\ExperienceAnalytics\Dashboard\Forecasting\bootstrap.sitecore.analytics.css" />
+    <Content Include="sitecore\shell\client\Applications\ExperienceAnalytics\Dashboard\Forecasting\country.js" />
+    <Content Include="sitecore\shell\client\Applications\ExperienceAnalytics\Dashboard\Forecasting\fonts\Montserrat-Bold.svg" />
+    <Content Include="sitecore\shell\client\Applications\ExperienceAnalytics\Dashboard\Forecasting\fonts\Montserrat-Regular.svg" />
+    <Content Include="sitecore\shell\client\Applications\ExperienceAnalytics\Dashboard\Forecasting\forecast.css" />
+    <Content Include="sitecore\shell\client\Applications\ExperienceAnalytics\Dashboard\Forecasting\products.js" />
+    <Content Include="sitecore\shell\client\Speak\Assets\lib\core\1.1\plotly-basic.js" />
+    <Content Include="sitecore\shell\client\Speak\Assets\lib\core\1.1\typeahead.bundle.js" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\ContactApiController.cs" />
@@ -176,20 +178,27 @@
     <Compile Include="Services\ItemService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\web.config" />
-    <None Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
-    <None Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
+    <Content Include="sitecore\shell\client\Applications\ExperienceAnalytics\Dashboard\Forecasting\Country.cshtml" />
+    <Content Include="sitecore\shell\client\Applications\ExperienceAnalytics\Dashboard\Forecasting\fonts\Montserrat-Bold.eot" />
+    <Content Include="sitecore\shell\client\Applications\ExperienceAnalytics\Dashboard\Forecasting\fonts\Montserrat-Bold.ttf" />
+    <Content Include="sitecore\shell\client\Applications\ExperienceAnalytics\Dashboard\Forecasting\fonts\Montserrat-Bold.woff" />
+    <Content Include="sitecore\shell\client\Applications\ExperienceAnalytics\Dashboard\Forecasting\fonts\Montserrat-Bold.woff2" />
+    <Content Include="sitecore\shell\client\Applications\ExperienceAnalytics\Dashboard\Forecasting\fonts\Montserrat-Regular.eot" />
+    <Content Include="sitecore\shell\client\Applications\ExperienceAnalytics\Dashboard\Forecasting\fonts\Montserrat-Regular.ttf" />
+    <Content Include="sitecore\shell\client\Applications\ExperienceAnalytics\Dashboard\Forecasting\fonts\Montserrat-Regular.woff" />
+    <Content Include="sitecore\shell\client\Applications\ExperienceAnalytics\Dashboard\Forecasting\fonts\Montserrat-Regular.woff2" />
+    <Content Include="sitecore\shell\client\Applications\ExperienceAnalytics\Dashboard\Forecasting\Products.cshtml" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\..\..\Foundation\ProcessingEngine\code\Demo.Foundation.ProcessingEngine.csproj">
       <Project>{0D1A5FF4-E76F-48D3-8211-92085D45E2CE}</Project>
       <Name>Demo.Foundation.ProcessingEngine</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

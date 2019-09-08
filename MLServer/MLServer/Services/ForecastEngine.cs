@@ -112,7 +112,7 @@ namespace MLServer.Services
         {
             Stats = list;
             _mlContext = new MLContext(1);
-            var trainingDataView = _mlContext.Data.LoadFromEnumerable(list);
+            var trainingDataView = _mlContext.Data.LoadFromEnumerable(list.Where(x => x.Prev>=0 && x.Next>=0));
 
             var trainer = _mlContext.Regression.Trainers.FastTreeTweedie();
             var trainingPipeline = _mlContext.Transforms
@@ -142,10 +142,12 @@ namespace MLServer.Services
         }
         public static float ProductForecast(ProductStats data)
         {
-            var predictionEngine = _mlContext.Model.CreatePredictionEngine<ProductStats, ProductUnitPrediction>(TrainModel);
+            var currentMonthStats = ProductHistory(data.ProductId).First(x => x.Year == data.Year && x.Month == data.Month);
 
-            ProductUnitPrediction prediction = predictionEngine.Predict(data);
-            return prediction.Score;
+            var predictionEngine = _mlContext.Model.CreatePredictionEngine<ProductStats, ProductUnitPrediction>(TrainModel);
+            ProductUnitPrediction nextMonthPrediction = predictionEngine.Predict(currentMonthStats);
+
+            return nextMonthPrediction.Score;
         }
 
         // countries
@@ -155,7 +157,7 @@ namespace MLServer.Services
             Countries = list.Select(x => x.Country).Distinct().ToList();
 
             _mlContext = new MLContext(1);
-            var trainingDataView = _mlContext.Data.LoadFromEnumerable(list);
+            var trainingDataView = _mlContext.Data.LoadFromEnumerable(list.Where(x => x.Prev >= 0 && x.Next >= 0));
 
             var trainer = _mlContext.Regression.Trainers.FastTreeTweedie();
             var trainingPipeline = _mlContext.Transforms
@@ -185,10 +187,11 @@ namespace MLServer.Services
         }
         public static float CountryForecast(CountryStats data)
         {
+            var currentMonthStats = CountryHistory(data.Country).First(x => x.Year == data.Year && x.Month == data.Month);
             var predictionEngine = _mlContext.Model.CreatePredictionEngine<CountryStats, ProductUnitPrediction>(TrainModelCountry);
 
-            ProductUnitPrediction prediction = predictionEngine.Predict(data);
-            return prediction.Score;
+            ProductUnitPrediction nextMonthPrediction = predictionEngine.Predict(currentMonthStats);
+            return nextMonthPrediction.Score;
         }
 
         public static List<string> GetCountries()

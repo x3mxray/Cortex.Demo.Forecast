@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Web.Http;
 using Demo.Foundation.ProcessingEngine.Models.ML;
 using Demo.Project.Demo.Services;
@@ -42,47 +40,38 @@ namespace Demo.Project.Demo.Controllers
         private string _countryHistoryUrl = "/api/forecast/countrystats";
         private string _countryForecastUrl = "/api/forecast/countryforecast";
         private string _countryUrl = "/api/forecast/getcountries";
-        private static int adjustMonth = 0;
+
         [HttpGet]
-        public async Task<IHttpActionResult> SimilarProducts(string description)
+        public IHttpActionResult SimilarProducts(string description)
         {
             var items = ItemService.Find(description).ToList();
-
             return Ok(items);
         }
 
         [HttpGet]
-        public async Task<IHttpActionResult> History(string id)
+        public IHttpActionResult History(string id)
         {
             var client = new RestClient(_mlServerUrl);
             var request = new RestRequest(_productHistoryUrl, Method.POST);
             request.AddQueryParameter("productId", id);
             var response = client.Execute<List<ProductStats>>(request);
-
-            return Ok(SetAdjust(response.Data));
+         
+            return Ok(response.Data);
         }
 
         [HttpGet]
-        public IHttpActionResult GetProductUnitDemandEstimation([FromUri]string productId, [FromUri]int year, [FromUri]int month, [FromUri]float units, [FromUri]float avg,
-            [FromUri]int count, [FromUri]float prev)
+        public IHttpActionResult GetProductUnitDemandEstimation([FromUri]string productId, [FromUri]int year, [FromUri]int month)
         {
             var inputExample = new ProductStats
             {
                 ProductId = productId,
                 Year = year,
-                Month = month,
-                Count = count,
-                Units = (int)units,
-                Avg = (int)avg,
-                Prev = (int)prev,
-                Next = 0
+                Month = month
             };
-
-            var data = SetAdjust(inputExample);
 
             var client = new RestClient(_mlServerUrl);
             var request = new RestRequest(_productForecastUrl, Method.POST);
-            request.AddJsonBody(data);
+            request.AddJsonBody(inputExample);
             var response = client.Execute<float>(request);
 
             return Ok(response.Data);
@@ -94,59 +83,7 @@ namespace Demo.Project.Demo.Controllers
             return Ok();
         }
 
-
-        private List<ProductStats> SetAdjust(List<ProductStats> data)
-        {
-            var date2 = DateTime.Now;//.AddMonths(-1);
-            var date1 = data.Last();
-            var diff = Math.Abs(((date1.Year - date2.Year) * 12) + date1.Month - date2.Month);
-            adjustMonth = diff;
-
-            foreach (var d in data)
-            {
-                var dt = new DateTime(d.Year, d.Month, 1).AddMonths(adjustMonth);
-                d.Year = dt.Year;
-                d.Month = dt.Month;
-            }
-
-            return data;
-        }
-
-        private ProductStats SetAdjust(ProductStats d)
-        {
-            var dt = new DateTime(d.Year, d.Month, 1).AddMonths(adjustMonth);
-            d.Year = dt.Year;
-            d.Month = dt.Month;
-
-            return d;
-        }
-
-        private List<CountryStats> SetAdjust(List<CountryStats> data)
-        {
-            var date2 = DateTime.Now;//.AddMonths(-1);
-            var date1 = data.Last();
-            var diff = Math.Abs(((date1.Year - date2.Year) * 12) + date1.Month - date2.Month);
-            adjustMonth = diff;
-
-            foreach (var d in data)
-            {
-                var dt = new DateTime(d.Year, d.Month, 1).AddMonths(adjustMonth);
-                d.Year = dt.Year;
-                d.Month = dt.Month;
-            }
-
-            return data;
-        }
-
-        private CountryStats SetAdjust(CountryStats d)
-        {
-            var dt = new DateTime(d.Year, d.Month, 1).AddMonths(adjustMonth);
-            d.Year = dt.Year;
-            d.Month = dt.Month;
-
-            return d;
-        }
-
+       
         [HttpGet]
         public IHttpActionResult GetCountries()
         {
@@ -179,49 +116,32 @@ namespace Demo.Project.Demo.Controllers
                 Name = country.Name
             };
         }
-        public string GetCountryCodeByName(string name)
-        {
-            var country = _countries.FirstOrDefault(x => x.Name == name);
-            if (country != null)
-            {
-                return country["Country Code"];
-            }
-            return name;
-        }
-
+       
         [HttpGet]
-        public async Task<IHttpActionResult> CountryHistory(string code)
+        public IHttpActionResult CountryHistory(string code)
         {
             var client = new RestClient(_mlServerUrl);
             var request = new RestRequest(_countryHistoryUrl, Method.POST);
-            request.AddQueryParameter("productId", code);
+            request.AddQueryParameter("country", code);
             var response = client.Execute<List<CountryStats>>(request);
 
-            return Ok(SetAdjust(response.Data));
+            return Ok(response.Data);
         }
 
 
         [HttpGet]
-        public IHttpActionResult CountryForecast([FromUri]string country, [FromUri]int year, [FromUri]int month, [FromUri]float units, [FromUri]float avg,
-            [FromUri]int count, [FromUri]float prev)
+        public IHttpActionResult CountryForecast([FromUri]string country, [FromUri]int year, [FromUri]int month)
         {
             var inputExample = new CountryStats
             {
                 Country = country,
                 Year = year,
-                Month = month,
-                Count = count,
-                Units = (int)units,
-                Avg = (int)avg,
-                Prev = (int)prev,
-                Next = 0
+                Month = month
             };
-
-            var data = SetAdjust(inputExample);
 
             var client = new RestClient(_mlServerUrl);
             var request = new RestRequest(_countryForecastUrl, Method.POST);
-            request.AddJsonBody(data);
+            request.AddJsonBody(inputExample);
             var response = client.Execute<float>(request);
 
             return Ok(response.Data);
