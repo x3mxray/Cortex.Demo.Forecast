@@ -35,7 +35,10 @@ namespace MLServer.Services
             get
             {
                 if (_countries != null) return _countries;
-                _countries = StatsCountry.Select(x => x.Country).Distinct().ToList();
+                _countries = StatsCountry
+                    .GroupBy(x => x.Country, (country, c) => new {Country = country, Count = c.Count()})
+                    .Where(x => x.Count>4).OrderByDescending(x => x.Count)
+                    .Select(x => x.Country).Distinct().ToList();
                 return _countries;
             }
             set => _countries = value;
