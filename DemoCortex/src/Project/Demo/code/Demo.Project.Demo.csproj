@@ -154,7 +154,7 @@
     <Reference Include="System.Configuration" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Config\Include\Project\Demo.config">
+    <Content Include="App_Config\Include\Project\Demo.Forecast.config">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="sitecore\shell\client\Applications\ExperienceAnalytics\Dashboard\Forecasting\bootstrap.sitecore.analytics.css" />
@@ -168,10 +168,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\ContactApiController.cs" />
-    <Compile Include="Controllers\DemoController.cs" />
-    <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\ProductApiController.cs" />
     <Compile Include="IoC\DemoServicesConfigurator.cs" />
     <Compile Include="IoC\ServiceCollectionExtensions.cs" />
+    <Compile Include="Models\CountryModel.cs" />
     <Compile Include="Models\ParseDataResult.cs" />
     <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

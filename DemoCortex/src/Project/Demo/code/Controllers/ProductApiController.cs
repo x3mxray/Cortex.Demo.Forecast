@@ -2,20 +2,21 @@
 using System.Linq;
 using System.Web.Http;
 using Demo.Foundation.ProcessingEngine.Models.ML;
+using Demo.Project.Demo.Models;
 using Demo.Project.Demo.Services;
 using RestSharp;
 using Sitecore.Data;
 using Sitecore.Data.Items;
 namespace Demo.Project.Demo.Controllers
 {
-    public class ProductController : ApiController
+    public class ProductApiController : ApiController
     {
         // Analytics->Lookup->Countries
         // used for displaying country friendly name
         static readonly ID CountryFolder = new ID("{DBE138C0-160F-4540-9868-0098E2CE8174}");
         private static readonly List<Item> Countries;
 
-        static ProductController()
+        static ProductApiController()
         {
             var folder = Sitecore.Context.Database.GetItem(CountryFolder);
             if (folder != null)
@@ -95,19 +96,6 @@ namespace Demo.Project.Demo.Controllers
             return Ok(result);
         }
 
-
-        public CountryModel GetCountryModel(string code)
-        {
-            var country = Countries.FirstOrDefault(x => x["Country Code"] == code);
-            if (country == null) return null;
-
-            return new CountryModel
-            {
-                Code = code,
-                Name = country.Name
-            };
-        }
-       
         [HttpGet]
         public IHttpActionResult CountryHistory(string code)
         {
@@ -137,11 +125,19 @@ namespace Demo.Project.Demo.Controllers
 
             return Ok(response.Data);
         }
+
+        private CountryModel GetCountryModel(string code)
+        {
+            var country = Countries.FirstOrDefault(x => x["Country Code"] == code);
+            if (country == null) return null;
+
+            return new CountryModel
+            {
+                Code = code,
+                Name = country.Name
+            };
+        }
     }
 
-    public class CountryModel
-    {
-        public string Code { get; set; }
-        public string Name { get; set; }
-    }
+    
 }

@@ -9,9 +9,9 @@ namespace Demo.Project.Demo.Routes
         {
             GlobalConfiguration.Configure(config =>
             {
-                config.Routes.MapHttpRoute("WebApiRoute", "api/{controller}/{action}/", new
+                config.Routes.MapHttpRoute("SalesForecastApiRoute", "api/{controller}/{action}/", new
                 {
-                    controller = "Contact"
+                    controller = "ProductApi"
                 });
             });
         }
