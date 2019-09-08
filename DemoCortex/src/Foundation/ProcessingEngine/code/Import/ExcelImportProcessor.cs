@@ -25,10 +25,10 @@ namespace Demo.Foundation.ProcessingEngine.Import
             if (dataTable == null)
                 throw new ArgumentNullException(nameof(dataTable));
 
-            List<Customer> customers = new List<Customer>();
+            var customers = new List<Customer>();
 
             var groupedData = dataTable.AsEnumerable().GroupBy(x => x.Field<string>("CustomerID"));
-            foreach (IGrouping<string, DataRow> data in groupedData)
+            foreach (var data in groupedData)
             {
                 if (!string.IsNullOrEmpty(data.Key))
                 {
@@ -51,14 +51,14 @@ namespace Demo.Foundation.ProcessingEngine.Import
 
                         if (number > 0 && quantity > 0)
                         {
-                            customer.Invoices.Add(new PurchaseInvoice()
+                            customer.Invoices.Add(new PurchaseInvoice
                             {
                                 Quantity = quantity,
                                 Country = record["Country"].ToString(),
                                 Number = number,
                                 StockCode = record["StockCode"].ToString(),
                                 Price = unitPrice,
-                                TimeStamp = dt.AddYears(7),
+                                TimeStamp = dt,
                                 Currency = "EUR"
                             });
                         }

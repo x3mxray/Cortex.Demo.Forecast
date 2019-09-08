@@ -9,7 +9,7 @@ require.config({
 define(["sitecore", "bloodhound", "plotly", "typeahead"],
 
   function (sitecore, Bloodhound, Plotly, Typeahead) {
-    debugger;
+
     onLoadProductForecasting();
 
     var months = ["",
@@ -170,7 +170,7 @@ define(["sitecore", "bloodhound", "plotly", "typeahead"],
 
     function traceProductHistory(historyItems) {
       var y = $.map(historyItems, function (d) { return d.sales; });
-      var x = $.map(historyItems, function (d) { return `${months[d.Month]}<br>${d.Year}`;; });
+      var x = $.map(historyItems, function (d) { return `${months[d.Month]}<br>${d.Year}`; });
       var texts = $.map(historyItems, function (d) { return `${fullMonths[d.Month]}<br><b>${d.sales.toCurrencyLocaleString()}</b>`; });
 
       return {

@@ -173,6 +173,7 @@
     <Compile Include="IoC\DemoServicesConfigurator.cs" />
     <Compile Include="IoC\ServiceCollectionExtensions.cs" />
     <Compile Include="Models\ParseDataResult.cs" />
+    <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Routes\InitRoutes.cs" />
     <Compile Include="Services\ItemService.cs" />
@@ -194,11 +195,6 @@
       <Project>{0D1A5FF4-E76F-48D3-8211-92085D45E2CE}</Project>
       <Name>Demo.Foundation.ProcessingEngine</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\web.config">
-      <SubType>Designer</SubType>
-    </Content>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

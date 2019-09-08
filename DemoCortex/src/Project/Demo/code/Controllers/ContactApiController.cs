@@ -5,7 +5,6 @@ using Demo.Foundation.ProcessingEngine.Agents;
 using Demo.Foundation.ProcessingEngine.Import;
 using Demo.Foundation.ProcessingEngine.Services;
 using Demo.Project.Demo.Models;
-using Demo.Project.Demo.Services;
 
 namespace Demo.Project.Demo.Controllers
 {
@@ -59,34 +58,6 @@ namespace Demo.Project.Demo.Controllers
                 throw new Exception(ex.Message);
             }
          
-        }
-
-        // used for upload and create Product items from excel to Sitecore by using Demo-Data-Explorer(can takes ~15 minutes)
-        [HttpPost]
-        public async Task<ParseDataResult> UploadProducts()
-        {
-            try
-            {
-                var stream = await Request.Content.ReadAsStreamAsync();
-                var products = new ExcelImportProcessor().GetImportProducts(stream);
-
-                var count = products.Count;
-
-                var service = new ItemService();
-                service.CreateItems(products);
-
-                return new ParseDataResult
-                {
-                    CustomersCount = count,
-                    InteractionsCount = count,
-                    PurchasesCount = products.Count
-                };
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-
         }
     }
 }

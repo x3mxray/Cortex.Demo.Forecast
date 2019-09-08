@@ -8,41 +8,32 @@ using Sitecore.Data;
 using Sitecore.Data.Items;
 namespace Demo.Project.Demo.Controllers
 {
-    public class ProductModel
-    {
-        public ProductModel(string id, float price, string description)
-        {
-            this.id = id;
-            this.price = price;
-            this.description = description;
-        }
-        public string id { get; set; }
-        public float price { get; set; }
-        public string description { get; set; }
-    }
     public class ProductController : ApiController
     {
+        // Analytics->Lookup->Countries
+        // used for displaying country friendly name
         static readonly ID CountryFolder = new ID("{DBE138C0-160F-4540-9868-0098E2CE8174}");
-        private static List<Item> _countries;
+        private static readonly List<Item> Countries;
 
         static ProductController()
         {
             var folder = Sitecore.Context.Database.GetItem(CountryFolder);
             if (folder != null)
             {
-                _countries = folder.Children.ToList();
+                Countries = folder.Children.ToList();
             }
         }
 
-        private string _mlServerUrl = "http://ml.demo";
-        private string _productHistoryUrl = "/api/forecast/productstats";
-        private string _productForecastUrl = "/api/forecast/productforecast";
-        private string _countryHistoryUrl = "/api/forecast/countrystats";
-        private string _countryForecastUrl = "/api/forecast/countryforecast";
-        private string _countryUrl = "/api/forecast/getcountries";
+        // API endpoints to ML
+        private readonly string _mlServerUrl = Sitecore.Configuration.Settings.GetSetting("MlHostUrl");
+        private readonly string _productHistoryUrl = Sitecore.Configuration.Settings.GetSetting("MlApi_ProductHistory");
+        private readonly string _productForecastUrl = Sitecore.Configuration.Settings.GetSetting("MlApi_ProductForecast");
+        private readonly string _countryHistoryUrl = Sitecore.Configuration.Settings.GetSetting("MlApi_CountryHistory");
+        private readonly string _countryForecastUrl = Sitecore.Configuration.Settings.GetSetting("MlApi_CountryForecast");
+        private readonly string _countryUrl = Sitecore.Configuration.Settings.GetSetting("MlApi_CountryList");
 
         [HttpGet]
-        public IHttpActionResult SimilarProducts(string description)
+        public IHttpActionResult FindProduct(string description)
         {
             var items = ItemService.Find(description).ToList();
             return Ok(items);
@@ -60,7 +51,7 @@ namespace Demo.Project.Demo.Controllers
         }
 
         [HttpGet]
-        public IHttpActionResult GetProductUnitDemandEstimation([FromUri]string productId, [FromUri]int year, [FromUri]int month)
+        public IHttpActionResult Forecast([FromUri]string productId, [FromUri]int year, [FromUri]int month)
         {
             var inputExample = new ProductStats
             {
@@ -107,7 +98,7 @@ namespace Demo.Project.Demo.Controllers
 
         public CountryModel GetCountryModel(string code)
         {
-            var country = _countries.FirstOrDefault(x => x["Country Code"] == code);
+            var country = Countries.FirstOrDefault(x => x["Country Code"] == code);
             if (country == null) return null;
 
             return new CountryModel
