@@ -2,16 +2,21 @@
 Predict future sales by product and by country based on regression.
 Example of usage Sitecore Cortex with ML.Net.
 
+![Forecast](https://github.com/x3mxray/Cortex.Demo.Forecast/blob/master/documentation/images/forecast.jpg)
+
 Contains 2 solutions:
 - [DemoCortex](https://github.com/x3mxray/Cortex.Demo.Forecast/tree/master/DemoCortex)
 - [MLServer](https://github.com/x3mxray/Cortex.Demo.Forecast/tree/master/MLServer)
 
-Full overview of demo located [here](https://www.brimit.com/blog/dive-sitecore-cortex-machine-learning-introduction)
 
 # How to Deploy #
 
 ## Pre-requisites
 Sitecore 9.1.0 (for 9.1.1 and higher versions package references in project should be updated to corresponding versions)
+
+## Sitecore
+Install the sitecore package [Forecast module-1.0.zip](https://github.com/x3mxray/Cortex.Demo.Forecast/blob/master/install/Forecast_module-1.0.zip)
+
 
 # How to populate xConnect with testing data #
 * Build solution.

@@ -1,18 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Demo.Foundation.ProcessingEngine.Extensions;
-using Demo.Foundation.ProcessingEngine.Train.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Sitecore.Processing.Engine.Abstractions;
 using Sitecore.Processing.Engine.Agents;
-using Sitecore.Processing.Tasks.Options;
-using Sitecore.Processing.Tasks.Options.DataSources.DataExtraction;
-using Sitecore.Processing.Tasks.Options.Workers.ML;
-using Sitecore.XConnect;
-using Sitecore.XConnect.Collection.Model;
 
 namespace Demo.Foundation.ProcessingEngine.Agents
 {
@@ -32,7 +25,7 @@ namespace Demo.Foundation.ProcessingEngine.Agents
         protected override async Task RecurringExecuteAsync(CancellationToken token)
         {
             _logger.LogInformation("RecurringExecuteAsync: RegisterRfmModelTaskChain");
-            var expiresAfter = TimeSpan.FromDays(1);
+            var expiresAfter = TimeSpan.FromHours(1);
             await _taskManager.RegisterForecastTaskChainAsync(expiresAfter);
         }
     }
