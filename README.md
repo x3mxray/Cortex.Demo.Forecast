@@ -2,11 +2,20 @@
 Predict future sales by product and by country based on regression.
 Example of usage Sitecore Cortex with ML.Net.
 
+This demo shows how to use **Sitecore Cortex** in combination with **Machine Learning** in a simplistic way to fuel your company’s growth by applying the predictive approach to all your actions.
+
 ![Forecast](https://github.com/x3mxray/Cortex.Demo.Forecast/blob/master/documentation/images/forecast.jpg)
 
-Contains 2 solutions:
+Demo contains 2 solutions:
 - [DemoCortex](https://github.com/x3mxray/Cortex.Demo.Forecast/tree/master/DemoCortex)
 - [MLServer](https://github.com/x3mxray/Cortex.Demo.Forecast/tree/master/MLServer)
+
+## Business value
+
+* It is a benchmark. You can use it as the business as usual level you are going to achieve if nothing changes in your strategy.
+* You can calculate the incremental value of your new actions on top of this benchmark.
+* It can be utilized for planning. You can plan your demand and supply actions by looking at the forecasts. It helps to see where to invest more.
+* It is an excellent guide for planning budgets and targets.
 
 
 # How to Deploy #
@@ -16,7 +25,8 @@ Sitecore 9.1.0 (for 9.1.1 and higher versions package references in project shou
 
 ## Sitecore
 * Install the sitecore package [Forecast module-1.0.zip](https://github.com/x3mxray/Cortex.Demo.Forecast/blob/master/install/Forecast_module-1.0.zip)
-* Deploy marketing definitions (Outcomes is enough)
+* Deploy marketing definitions (*Outcomes* is enough)
+* Rebuild *sitecore_master_index*
 
 # Populate xConnect with testing data #
 * Build solution.

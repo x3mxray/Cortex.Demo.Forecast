@@ -39,3 +39,5 @@ You can see a lot of demo contacts in **Experience Profile** with list of **Purc
 * Sitecore asks MLServer about this forecast and returns results to EA Forecasting module
 
 ![Forecast](https://github.com/x3mxray/Cortex.Demo.Forecast/blob/master/documentation/images/forecast.jpg)
+
+* Statistics will be updated after processing agent sleep period that you can define in [Processing Engine -> sc.Processing.Engine.DemoAgents.xml](https://github.com/x3mxray/Cortex.Demo.Forecast/blob/master/DemoCortex/src/Foundation/ProcessingEngine/code/App_Config/Processing/Demo/sc.Processing.Engine.DemoAgents.xml)
