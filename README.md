@@ -28,6 +28,10 @@ Sitecore 9.1.0 (for 9.1.1 and higher versions package references in project shou
 * Deploy marketing definitions (*Outcomes* is enough)
 * Rebuild *sitecore_master_index*
 
+## xConnect and jobs
+* Extract and copy [xconnect](https://github.com/x3mxray/Cortex.Demo.Forecast/tree/master/install/xconnect.zip) to your xConnect instance
+* Restart xConnect instance and xconnect jobs in windows services
+
 # Populate xConnect with testing data #
 * Build solution.
 * Run Demo.Project.DemoDataExplorer.exe from project [Demo.Project.DemoDataExplorer](https://github.com/x3mxray/Cortex.Demo.Forecast/tree/master/DemoCortex/src/Project/DemoDataExplorer/code)
